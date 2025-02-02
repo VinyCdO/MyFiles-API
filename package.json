@@ -1,0 +1,29 @@
+{
+  "name": "myfiles-api",
+  "version": "1.0.0",
+  "description": "API para CRUD de uploads de arquivos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=.env app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VinyCdO/MyFiles-API.git"
+  },
+  "author": "Vinicius Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VinyCdO/MyFiles-API/issues"
+  },
+  "homepage": "https://github.com/VinyCdO/MyFiles-API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9"
+  }
+}
