@@ -1,4 +1,6 @@
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
 import { getTodosDocumentos, criarArquivo, atualizarArquivo, deletarArquivoCriado } from "../models/filesModel.js";
 
 export async function listarArquivos(req, res) {
@@ -44,9 +46,20 @@ export async function uploadArquivo(req, res) {
 
 export async function deletarArquivo(req, res) {
   const id = req.params.id;
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
   
+  const uploadsDir = path.join(__dirname, '../uploads');
+
   try {
-  
+    const files = fs.readdirSync(uploadsDir);
+    const fileToDelete = files.find(file => file.includes(id));
+
+    if (fileToDelete) {
+      fs.unlinkSync(path.join(uploadsDir, fileToDelete));
+    } 
+
     const arquivoDeletado = await deletarArquivoCriado(id);
     
     res.status(200).json(arquivoDeletado);

@@ -28,7 +28,6 @@ const routes = (app) => {
   app.get("/arquivos", listarArquivos);
   app.post("/arquivos", postarNovoArquivo);
   app.put("/arquivos/upload/:id", upload.single("arquivo"), uploadArquivo);
-  // app.put("/upload/:id", atualizarNovoPost);
   app.post("/delete/:id", deletarArquivo);
 }
 
