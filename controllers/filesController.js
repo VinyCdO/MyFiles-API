@@ -33,6 +33,8 @@ export async function uploadArquivo(req, res) {
   };
   
   try {
+    await apagarArquivoFisico(id);
+
     fs.renameSync(req.file.path, pathAtualizado);
 
     const arquivoAtualizado = await atualizarArquivo(id, novoArquivo);
@@ -47,18 +49,8 @@ export async function uploadArquivo(req, res) {
 export async function deletarArquivo(req, res) {
   const id = req.params.id;
 
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  
-  const uploadsDir = path.join(__dirname, '../uploads');
-
   try {
-    const files = fs.readdirSync(uploadsDir);
-    const fileToDelete = files.find(file => file.includes(id));
-
-    if (fileToDelete) {
-      fs.unlinkSync(path.join(uploadsDir, fileToDelete));
-    } 
+    await apagarArquivoFisico(id);
 
     const arquivoDeletado = await deletarArquivoCriado(id);
     
@@ -67,4 +59,18 @@ export async function deletarArquivo(req, res) {
     console.error(erro.message);
     res.status(500).json({"Erro":"Falha na requisição."})
   }
+}
+
+async function apagarArquivoFisico(id) {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  
+  const uploadsDir = path.join(__dirname, '../uploads');
+
+  const files = fs.readdirSync(uploadsDir);
+  const fileToDelete = files.find(file => file.includes(id));
+
+  if (fileToDelete) {
+    fs.unlinkSync(path.join(uploadsDir, fileToDelete));
+  } 
 }

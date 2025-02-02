@@ -41,6 +41,8 @@ export async function criarArquivo(novoArquivo) {
 
   const colecao = db.collection("meusDocumentos");
 
+  novoArquivo.createdAt = new Date();
+
   return colecao.insertOne(novoArquivo);
 }
 
@@ -58,6 +60,8 @@ export async function atualizarArquivo(id, arquivo) {
   const colecao = db.collection("meusDocumentos");
 
   const objId = ObjectId.createFromHexString(id);
+  
+  arquivo.updatedAt = new Date();
   
   return colecao.updateOne({_id: new ObjectId(objId)}, {$set:arquivo});
 }
