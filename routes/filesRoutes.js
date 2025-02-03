@@ -4,7 +4,7 @@ import cors from "cors";
 import { deletarArquivo, listarArquivos, postarNovoArquivo, uploadArquivo } from "../controllers/filesController.js";
 
 const corsOptions = {
-  origin: "http://localhost:8000",
+  origin: ["http://localhost:3000", "http://localhost:8000"],
   optionsSuccessStatus: 200
 }
 
