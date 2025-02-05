@@ -1,21 +1,18 @@
 # MyFiles-API
 API para CRUD de uploads de arquivos
 
-  Node.Js
-  
-  React
-  
-  MongoDB
+   Node.Js  
+   React
+   MongoDB
 
 Para testar o projeto basta rodar os comandos:
 
-  npm install
-  
-  npm run dev
+   npm install
+   npm run dev
 
 Aplicação está configurada para rodar na porta 8000:
 
-  http://localhost:8000
+   http://localhost:8000
 
 Há um arquivo no projeto MyFiles-API.postman_collection.json, com a collection para importação no postman para caso deseje testar os endpoints da API.
 
