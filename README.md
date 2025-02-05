@@ -1,17 +1,16 @@
 # MyFiles-API
 API para CRUD de uploads de arquivos
-
-<br>
 <br>
 <b>Stack</b>
+<br>
 <br>
 <p>   Node.Js</p>
 <p>   React</p>
 <p>   MongoDB</p>
 
-<br>
 Para testar o projeto basta rodar os comandos:
-
+<br>
+<br>
 <p>   npm install</p>
 <p>   npm run dev</p>
 
