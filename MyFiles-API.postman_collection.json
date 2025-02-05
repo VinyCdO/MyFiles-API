@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "177ac832-de64-4fb8-be2a-572a7291cce6",
+		"name": "MyFiles-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17373467"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/arquivos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Meu certificado DIO\",\r\n  \"description\": \"Certificado bootcamp Az204\",\r\n  \"filePath\": \"\",\r\n  \"fileName\": \"\",\r\n  \"createdAt\": \"\",\r\n  \"updatedAt\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/arquivos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"arquivos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/arquivos/upload/67a08473ab5e181fb63286e9",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "arquivo",
+							"type": "file",
+							"src": "/C:/Users/vinic/OneDrive/Documentos/Documentos - Acadêmicos/Bootcamp DIO Azure/Conclusão Bootcamp AZ204.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/arquivos/upload/67a08473ab5e181fb63286e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"arquivos",
+						"upload",
+						"67a08473ab5e181fb63286e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/delete/679fb6a8781e404bd485eed5",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/delete/67a240c91184a7eabbb324bd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"delete",
+						"67a240c91184a7eabbb324bd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/arquivos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/arquivos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"arquivos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
