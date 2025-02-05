@@ -2,12 +2,15 @@
 API para CRUD de uploads de arquivos
 
   Node.Js
+  
   React
+  
   MongoDB
 
 Para testar o projeto basta rodar os comandos:
 
   npm install
+  
   npm run dev
 
 Aplicação está configurada para rodar na porta 8000:
