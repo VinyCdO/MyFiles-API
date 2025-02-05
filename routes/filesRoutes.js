@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import cors from "cors";
-import { deletarDocumento, listarDocumentos, listarDocumentosPorId, postarNovoDocumento, uploadDocumento } from "../controllers/filesController.js";
+import { deletarDocumento, listarDocumentos, listarDocumentosPorId, postarNovoDocumento, uploadDocumento, updateDocumento } from "../controllers/filesController.js";
 
 const corsOptions = {
   origin: ["http://localhost:3000", "http://localhost:8000"],
@@ -29,6 +29,7 @@ const routes = (app) => {
   app.get("/documentos/:id", listarDocumentosPorId);
   app.post("/documentos", postarNovoDocumento);
   app.put("/documentos/upload/:id", upload.single("documento"), uploadDocumento);
+  app.put("/documentos/:id", updateDocumento);
   app.delete("/documentos/:id", deletarDocumento);
 }
 

@@ -50,7 +50,7 @@ export async function uploadDocumento(req, res) {
 
   const novoDocumento = {
     filePath: urlImg,
-    fileName: req.file.originalname    
+    fileName: req.file.originalname     
   };
 
   try {
@@ -65,6 +65,21 @@ export async function uploadDocumento(req, res) {
     console.error(erro.message);
     res.status(500).json({"Erro": erro.message});
   }
+}
+
+export async function updateDocumento(req, res) {
+  const id = req.params.id;
+  const documentoAtualizado = req.body;
+  
+  try {
+    const Documento = await atualizarDocumento(id, documentoAtualizado);
+
+    res.status(201).json(Documento);
+    
+  } catch (erro) {
+    console.error(erro.message);
+    res.status(500).json({"Erro": erro.message});
+  }  
 }
 
 export async function deletarDocumento(req, res) {
