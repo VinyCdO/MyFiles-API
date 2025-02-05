@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"Meu certificado DIO\",\r\n  \"description\": \"Certificado bootcamp Az204\",\r\n  \"filePath\": \"\",\r\n  \"fileName\": \"\",\r\n  \"createdAt\": \"\",\r\n  \"updatedAt\": \"\"\r\n}",
+					"raw": "{\r\n  \"title\": \"Meu certificado DIO qq\",\r\n  \"description\": \"Certificado bootcamp Az204\",\r\n  \"filePath\": \"\",\r\n  \"fileName\": \"\",\r\n  \"createdAt\": \"\",\r\n  \"updatedAt\": \"\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,14 +24,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/arquivos",
+					"raw": "http://localhost:8000/documentos",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"arquivos"
+						"documentos"
 					]
 				}
 			},
@@ -51,21 +51,27 @@
 						{
 							"key": "arquivo",
 							"type": "file",
-							"src": "/C:/Users/vinic/OneDrive/Documentos/Documentos - Acadêmicos/Bootcamp DIO Azure/Conclusão Bootcamp AZ204.png"
+							"src": "postman-cloud:///1efe3717-5912-41f0-8684-2c862bbb4360"
+						},
+						{
+							"key": "fileName",
+							"value": "Conclusão Bootcamp AZ204.png",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8000/arquivos/upload/67a08473ab5e181fb63286e9",
+					"raw": "http://localhost:8000/documentos/upload/67a2d8caa051d9348280dffd",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"arquivos",
+						"documentos",
 						"upload",
-						"67a08473ab5e181fb63286e9"
+						"67a2d8caa051d9348280dffd"
 					]
 				}
 			},
@@ -80,14 +86,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/delete/67a240c91184a7eabbb324bd",
+					"raw": "http://localhost:8000/documentos/67a240c91184a7eabbb324bd",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"delete",
+						"documentos",
 						"67a240c91184a7eabbb324bd"
 					]
 				}
@@ -103,14 +109,46 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/arquivos",
+					"raw": "http://localhost:8000/documentos",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
-						"arquivos"
+						"documentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/documentos/67a390b74b4bfffdbc203d74",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Carta de Apresentação\",\r\n    \"description\": \"Carta de apresentação do Vinicius\",\r\n    \"fileName\": \"ApresentaÃ§Ã£o.docx\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/documentos/67a390b74b4bfffdbc203d74",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"documentos",
+						"67a390b74b4bfffdbc203d74"
 					]
 				}
 			},
