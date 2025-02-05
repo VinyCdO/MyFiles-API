@@ -12,38 +12,49 @@ export async function getTodosDocumentos() {
   return colecao.find().toArray();
 }
 
-export async function criarArquivo(novoArquivo) {
+export async function getDocumentoPorId(id) {
   const db = conexao.db("DbMeusDocumentos");
 
-  if (!novoArquivo.title || !novoArquivo.description) {
+  const colecao = db.collection("meusDocumentos");
+
+  const objId = ObjectId.createFromHexString(id);
+
+  return colecao.findOne({ _id: new ObjectId(objId) });
+}
+
+export async function criarDocumento(novoDocumento) {
+  const db = conexao.db("DbMeusDocumentos");
+
+  if (!novoDocumento.title || !novoDocumento.description) {
+    console.log(novoDocumento);
     throw new Error("Título e descrição são obrigatórios.");  
   }
 
-  if (novoArquivo.title.length > 100) {
+  if (novoDocumento.title.length > 100) {
     throw new Error("Título deve ter no máximo 100 caracteres.");
   }
 
-  if (novoArquivo.description.length > 2000) {
+  if (novoDocumento.description.length > 2000) {
     throw new Error("Descrição deve ter no máximo 2000 caracteres.");
   }
 
   const extensoesInvalidas = [".exe", ".zip", ".bat"];
-  const extensaoArquivo = novoArquivo.fileName.split('.').pop();
+  const extensaoDocumento = novoDocumento.fileName.split('.').pop();
 
-  if (extensoesInvalidas.includes(`.${extensaoArquivo}`)) {
-    throw new Error("Extensão de arquivo não permitida.");
+  if (extensoesInvalidas.includes(`.${extensaoDocumento}`)) {
+    throw new Error("Extensão de Documento não permitida.");
   }
 
-  const arquivoExistente = await verificarArquivoExistente(novoArquivo.title);
-  if (arquivoExistente) {
-    throw new Error("Arquivo com este título já existe.");
+  const DocumentoExistente = await verificarDocumentoExistente(novoDocumento.title);
+  if (DocumentoExistente) {
+    throw new Error("Documento com este título já existe.");
   }
 
   const colecao = db.collection("meusDocumentos");
 
-  novoArquivo.createdAt = new Date();
+  novoDocumento.createdAt = new Date();
 
-  return colecao.insertOne(novoArquivo);
+  return colecao.insertOne(novoDocumento);
 }
 
 export async function pesquisarPorTitulo(title) {
@@ -54,19 +65,19 @@ export async function pesquisarPorTitulo(title) {
   return colecao.find({ title: { $regex: title, $options: "i" } }).toArray();
 }
 
-export async function atualizarArquivo(id, arquivo) {
+export async function atualizarDocumento(id, Documento) {
   const db = conexao.db("DbMeusDocumentos");
 
   const colecao = db.collection("meusDocumentos");
 
   const objId = ObjectId.createFromHexString(id);
   
-  arquivo.updatedAt = new Date();
+  Documento.updatedAt = new Date();
   
-  return colecao.updateOne({_id: new ObjectId(objId)}, {$set:arquivo});
+  return colecao.updateOne({_id: new ObjectId(objId)}, {$set:Documento});
 }
 
-export async function deletarArquivoCriado(id) {
+export async function deletarDocumentoCriado(id) {
   const db = conexao.db("DbMeusDocumentos");
 
   const colecao = db.collection("meusDocumentos");
@@ -77,12 +88,12 @@ export async function deletarArquivoCriado(id) {
 }
 
 //sessão tratamentos de validação de registros
-export async function verificarArquivoExistente(title) {
+export async function verificarDocumentoExistente(title) {
   const db = conexao.db("DbMeusDocumentos");
 
   const colecao = db.collection("meusDocumentos");
 
-  const documentoExistente = await colecao.findOne({ title: title });
+  const DocumentoExistente = await colecao.findOne({ title: title });
 
-  return documentoExistente !== null;
+  return DocumentoExistente !== null;
 }

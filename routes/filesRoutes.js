@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import cors from "cors";
-import { deletarArquivo, listarArquivos, postarNovoArquivo, uploadArquivo } from "../controllers/filesController.js";
+import { deletarDocumento, listarDocumentos, listarDocumentosPorId, postarNovoDocumento, uploadDocumento } from "../controllers/filesController.js";
 
 const corsOptions = {
   origin: ["http://localhost:3000", "http://localhost:8000"],
@@ -20,15 +20,16 @@ const storage = multer.diskStorage({
 const upload = multer({dest:"./uploads", storage});
 
 const routes = (app) => {
-  // Permite que o servidor receba dados no formato JSON
+  
   app.use(express.json());
 
   app.use(cors(corsOptions));
   
-  app.get("/arquivos", listarArquivos);
-  app.post("/arquivos", postarNovoArquivo);
-  app.put("/arquivos/upload/:id", upload.single("arquivo"), uploadArquivo);
-  app.post("/delete/:id", deletarArquivo);
+  app.get("/documentos", listarDocumentos);
+  app.get("/documentos/:id", listarDocumentosPorId);
+  app.post("/documentos", postarNovoDocumento);
+  app.put("/documentos/upload/:id", upload.single("documento"), uploadDocumento);
+  app.delete("/documentos/:id", deletarDocumento);
 }
 
 export default routes;

@@ -1,67 +1,88 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
-import { getTodosDocumentos, criarArquivo, atualizarArquivo, deletarArquivoCriado } from "../models/filesModel.js";
+import { getTodosDocumentos, getDocumentoPorId, criarDocumento, atualizarDocumento, deletarDocumentoCriado } from "../models/filesModel.js";
 
-export async function listarArquivos(req, res) {
-  const posts = await getTodosDocumentos();
-  
-  res.status(200).json(posts);
-}
-
-export async function postarNovoArquivo(req, res) {
-  const novoArquivo = req.body;
-  
+export async function listarDocumentos(req, res) {  
   try {
-    const arquivo = await criarArquivo(novoArquivo);
-
-    res.status(201).json(novoArquivo);
+    const Documentos = await getTodosDocumentos();
+    
+    res.status(200).json(Documentos);
   } catch (erro) {
     console.error(erro);
-    res.status(500).json({"Falha na requisição": erro.message});
+    res.status(500).json({"Erro":"Falha na requisição."});
   }
 }
 
-export async function uploadArquivo(req, res) {
+export async function listarDocumentosPorId(req, res) {
+  try {
+    const id = req.params.id;
+    const Documento = await getDocumentoPorId(id);
+    
+    if (Documento) {
+      res.status(200).json(Documento);
+    } else {
+      res.status(404).json({"Erro":"Documento não encontrado."});
+    }
+  } catch (erro) {
+    console.error(erro);
+    res.status(500).json({"Erro":"Falha na requisição."});
+  }
+} 
+
+export async function postarNovoDocumento(req, res) {
+  const novoDocumento = req.body;
+  
+  try {
+    const Documento = await criarDocumento(novoDocumento);
+
+    res.status(201).json(Documento);
+  } catch (erro) {
+    console.error(erro);
+    res.status(500).json({"Erro": erro.message});
+  }
+}
+
+export async function uploadDocumento(req, res) {
   const id = req.params.id;
   const pathAtualizado = `uploads/${id}-${req.file.originalname}`;
   const urlImg = `http://localhost:8000/uploads/${id}-${req.file.originalname}`;
 
-  const novoArquivo = {
+  const novoDocumento = {
     filePath: urlImg,
     fileName: req.file.originalname    
   };
-  
+
   try {
-    await apagarArquivoFisico(id);
+    await apagarDocumentoFisico(id);
 
     fs.renameSync(req.file.path, pathAtualizado);
 
-    const arquivoAtualizado = await atualizarArquivo(id, novoArquivo);
+    const DocumentoAtualizado = await atualizarDocumento(id, novoDocumento);
         
-    res.status(200).json(arquivoAtualizado);
+    res.status(200).json(DocumentoAtualizado);
   } catch (erro) {
     console.error(erro.message);
-    res.status(500).json({"Falha na requisição": erro.message});
+    res.status(500).json({"Erro": erro.message});
   }
 }
 
-export async function deletarArquivo(req, res) {
+export async function deletarDocumento(req, res) {
   const id = req.params.id;
 
   try {
-    await apagarArquivoFisico(id);
+    await apagarDocumentoFisico(id);
 
-    const arquivoDeletado = await deletarArquivoCriado(id);
+    const DocumentoDeletado = await deletarDocumentoCriado(id);
     
-    res.status(200).json(arquivoDeletado);
+    res.status(200).json(DocumentoDeletado);
   } catch (erro) {
     console.error(erro.message);
     res.status(500).json({"Erro":"Falha na requisição."})
   }
 }
 
-async function apagarArquivoFisico(id) {
+async function apagarDocumentoFisico(id) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   
